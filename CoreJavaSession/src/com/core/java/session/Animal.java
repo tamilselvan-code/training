@@ -68,23 +68,22 @@ public class Animal{
 		return name;
 	}
 
-	// equals() method overriding
 	@Override
-	public boolean equals(Object object) {
-		boolean flag = false;
-		System.out.println("equals called");
-		if (object != null) {
-			// type casting of the argument
-			Animal animal = (Animal) object;
-			if (animal.getName().equals(this.getName())) {
-				flag = true;
-			}
-		}
-		return flag;
+	public int hashCode() {
+		return Objects.hash(age, name);
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(this.getName());
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Animal other = (Animal) obj;
+		return age == other.age && Objects.equals(name, other.name);
 	}
+
+	
 }
