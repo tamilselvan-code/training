@@ -24,7 +24,7 @@ public class JDBCWithTransaction {
 
 			// ************ Using Prepared Statement *************//
 			PreparedStatement prepStmt1 = con.prepareStatement(SQL_INSERT);
-			prepStmt1.setInt(1, 1003);
+			prepStmt1.setInt(1, 1012);
 			prepStmt1.setString(2, "Joseph");
 			prepStmt1.setString(3, "John");
 			prepStmt1.setString(4, "USA");
@@ -35,7 +35,7 @@ public class JDBCWithTransaction {
 //			errorMethod();
 			
 			PreparedStatement prepStmt2 = con.prepareStatement(SQL_INSERT);
-			prepStmt2.setInt(1, 1004);
+			prepStmt2.setInt(1, 1013);
 			prepStmt2.setString(2, "Mike");
 			prepStmt2.setString(3, "Sherrard");
 			prepStmt2.setString(4, "USA");
@@ -55,6 +55,7 @@ public class JDBCWithTransaction {
 			try {
 				//roll back the changes
 				con.rollback();
+				System.out.println("Rollback done");
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
