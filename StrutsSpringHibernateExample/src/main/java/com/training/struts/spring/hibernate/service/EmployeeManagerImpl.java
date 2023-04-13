@@ -58,6 +58,9 @@ public class EmployeeManagerImpl implements EmployeeManager {
 
 		// for Join column value
 		address1.setEmployee(employee);
+		address2.setEmployee(employee);
+		address3.setEmployee(employee);
+		address4.setEmployee(employee);
 
 		employeeDAO.addEmployee(employee);
 	}
