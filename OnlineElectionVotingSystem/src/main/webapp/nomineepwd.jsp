@@ -15,7 +15,7 @@
 <%
  String party = request.getParameter("party");
  Details m = new Details();
- int i = Dao.register(m, "delete from nominee where pn='"+party+"'");
+ int i = Dao.register(m, "delete from nominee where party='"+party+"'");
 
  if(i!=0)
  {
