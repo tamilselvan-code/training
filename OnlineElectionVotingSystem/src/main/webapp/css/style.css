@@ -137,12 +137,12 @@ ul.multi-column-dropdown li a {
 /*-- banner --*/
 .banner{
 	background:url(../images/I6.jpg) no-repeat 0px 0px;
-	background-size: cover;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	-ms-background-size: cover;
-	min-height: 800px;
+	background-size: auto;
+	-webkit-background-size: auto;
+	-moz-background-size: auto;
+	-o-background-size: auto;
+	-ms-background-size: auto;
+	min-height: 500px;
 }
 .banner1{
 	background:url(../images/download1.jpg) no-repeat 0px 0px;
@@ -2893,7 +2893,7 @@ p.est span{
 		padding: 10px;
 		font-size: 13px;
 	}
-		background: #F7F7F7;
+
 	.footer-contact input[type="submit"] {
 		margin: 0;
 		width: 20%;
