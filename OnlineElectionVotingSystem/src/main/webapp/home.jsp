@@ -558,7 +558,7 @@
 							<%} 
 								else
 								{
-									response.sendRedirect("viewevent.jsp");
+									//response.sendRedirect("viewevent.jsp");
 								}
 							%>
 							</center>

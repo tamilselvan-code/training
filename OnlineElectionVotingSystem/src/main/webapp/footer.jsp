@@ -14,7 +14,7 @@
 <!-- footer -->
 	<div class="footer">
 		<div class="container">
-			<h3>Election India</h3><br>
+			<h3>Election Commission Of India</h3><br>
 			
 			
 			<div class="footer-grids">
@@ -34,7 +34,7 @@
 				<div class="clearfix"> </div>
 			</div> 
 			<div class="footer-copy">
-				<p>&copy 2018-19 Election. All rights reserved | Design by Tithi,Nishit,Niyati,Nisarg,Shrushti,Karan</p>
+				<p>&copy 2023-24 Election Commission of India. All rights reserved.</p>
 			</div>
 		</div>
 	</div> 
