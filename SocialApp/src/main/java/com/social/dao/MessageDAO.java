@@ -43,7 +43,6 @@ public class MessageDAO {
 	}
 
 	public ArrayList<Message> getMessage(int fromUserID, int toUserID) throws SQLException {
-		System.out.println("getMessage() fromUserID: " + fromUserID + " toUserID: " + toUserID);
 		Connection conn = DBConnection.getInstance().getConnection();
 		PreparedStatement st = conn.prepareStatement(
 				"SELECT * FROM message WHERE (from_user = ? OR to_user = ?) AND (from_user = ? OR to_user = ?) ORDER BY chat_time;");
