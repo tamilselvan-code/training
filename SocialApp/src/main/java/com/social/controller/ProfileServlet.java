@@ -1,4 +1,4 @@
-package controller;
+package com.social.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.PostDAO;
-import dao.UserDAO;
-import model.Post;
-import model.User;
+import com.social.dao.PostDAO;
+import com.social.dao.UserDAO;
+import com.social.model.Post;
+import com.social.model.User;
 
 /**
  * Servlet implementation class ProfileServlet
@@ -21,42 +21,44 @@ import model.User;
 @WebServlet("/ProfileServlet")
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProfileServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ProfileServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("user_id") == null) {
 			response.sendRedirect("login");
 			return;
 		}
-		
+
 		PostDAO postDAO = new PostDAO();
-		
-		if(request.getParameter("post-delete") != null) {
+
+		if (request.getParameter("post-delete") != null) {
 			try {
 				postDAO.deletePost(Integer.parseInt(request.getParameter("post-delete")));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		if(request.getParameter("post-update") != null) {
+
+		if (request.getParameter("post-update") != null) {
 			request.setAttribute("post_id", Integer.parseInt(request.getParameter("post-update")));
 			request.getRequestDispatcher("/post-update.jsp").forward(request, response);
 			return;
 		}
-		
-		if(request.getParameter("deactivate") != null) {
+
+		if (request.getParameter("deactivate") != null) {
 			UserDAO userDAO = new UserDAO();
 			try {
 				userDAO.deleteUser(Integer.parseInt(request.getParameter("deactivate")));
@@ -66,7 +68,7 @@ public class ProfileServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
+
 		ArrayList<Post> posts = new ArrayList<>();
 		try {
 			posts = postDAO.getUserPost((int) session.getAttribute("user_id"));
@@ -74,28 +76,30 @@ public class ProfileServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("posts", posts);
-		
+
 		request.getRequestDispatcher("/profile.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("user_id") == null) {
 			response.sendRedirect("login");
 			return;
 		}
-		
+
 		String type = request.getParameter("type");
-		
-		if(type.equals("change_profile")) {
+
+		if (type.equals("change_profile")) {
 			String first_name = request.getParameter("first_name").trim();
 			String last_name = request.getParameter("last_name").trim();
 			String email = request.getParameter("email").trim();
-			
-			if(first_name.equals("") || last_name.equals("") || email.equals("")) {
+
+			if (first_name.equals("") || last_name.equals("") || email.equals("")) {
 				request.setAttribute("pmsg", "Type all required fields.");
 				doGet(request, response);
 			} else {
@@ -109,18 +113,17 @@ public class ProfileServlet extends HttpServlet {
 				request.setAttribute("pmsg", result);
 				doGet(request, response);
 			}
-		} else if(type.equals("change_password")) {
+		} else if (type.equals("change_password")) {
 			String password = request.getParameter("password").trim();
 			String cpassword = request.getParameter("cpassword").trim();
-			
-			if(password.equals("") || cpassword.equals("")) {
+
+			if (password.equals("") || cpassword.equals("")) {
 				request.setAttribute("pmsg", "Type all required fields.");
 				doGet(request, response);
-			} else if(!password.equals(cpassword)) {
+			} else if (!password.equals(cpassword)) {
 				request.setAttribute("pmsg", "New Password and Confirm Password are not match.");
 				doGet(request, response);
-			}
-			else {
+			} else {
 				UserDAO userDAO = new UserDAO();
 				User user = new User();
 				user.setUser_id((int) session.getAttribute("user_id"));
@@ -129,21 +132,21 @@ public class ProfileServlet extends HttpServlet {
 				request.setAttribute("pmsg", result);
 				doGet(request, response);
 			}
-		} else if(type.equals("update_post")) {
+		} else if (type.equals("update_post")) {
 			String post = request.getParameter("post").trim();
 			String post_id = request.getParameter("post_id");
 			PostDAO postDAO = new PostDAO();
-			
-			if(post.equals("")) {
+
+			if (post.equals("")) {
 				request.setAttribute("pmsg", "Post message is required.");
 				doGet(request, response);
 			} else {
 				try {
-					if(postDAO.getPost(Integer.parseInt(post_id)).getUser_id() != Integer.parseInt(session.getAttribute("user_id").toString())) {
+					if (postDAO.getPost(Integer.parseInt(post_id)).getUser_id() != Integer
+							.parseInt(session.getAttribute("user_id").toString())) {
 						request.setAttribute("pmsg", "Access denied.");
 						doGet(request, response);
-					}
-					else {
+					} else {
 						Post p = new Post();
 						p.setPost_id(Integer.parseInt(post_id));
 						p.setBody(post);

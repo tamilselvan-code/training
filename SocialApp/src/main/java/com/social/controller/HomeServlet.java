@@ -1,4 +1,4 @@
-package controller;
+package com.social.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.PostDAO;
-import model.Post;
+import com.social.dao.PostDAO;
+import com.social.model.Post;
 
 /**
  * Servlet implementation class HomeServlet
@@ -20,25 +20,27 @@ import model.Post;
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public HomeServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public HomeServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("user_id") == null) {
 			response.sendRedirect("login");
 			return;
 		}
-		
+
 		PostDAO postDAO = new PostDAO();
 		ArrayList<Post> posts = new ArrayList<>();
 		try {
@@ -47,24 +49,26 @@ public class HomeServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("posts", posts);
-		
+
 		request.getRequestDispatcher("/home.jsp").forward(request, response);
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("user_id") == null) {
 			response.sendRedirect("login");
 			return;
 		}
-		
+
 		String post = request.getParameter("post").trim();
-		
-		if(!post.equals("")) {
+
+		if (!post.equals("")) {
 			try {
 				PostDAO postDAO = new PostDAO();
 				postDAO.insertPost((int) session.getAttribute("user_id"), post);
@@ -73,7 +77,7 @@ public class HomeServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-	
+
 	}
 
 }

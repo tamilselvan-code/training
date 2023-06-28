@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="model.Message"%>
-<%@ page import="dao.UserDAO"%>
+<%@ page import="com.social.model.Message"%>
+<%@ page import="com.social.dao.UserDAO"%>
 <%
 if (session == null || session.getAttribute("user_id") == null) {
 	response.sendRedirect("login");

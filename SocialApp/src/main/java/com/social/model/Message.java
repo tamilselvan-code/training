@@ -1,4 +1,4 @@
-package model;
+package com.social.model;
 
 public class Message {
 	private int chat_id;
@@ -6,8 +6,9 @@ public class Message {
 	private String to_user;
 	private String message;
 	private String chat_time;
-	
-	public Message() {}
+
+	public Message() {
+	}
 
 	public Message(int chat_id, String from_user, String to_user, String message, String chat_time) {
 		super();
@@ -57,5 +58,5 @@ public class Message {
 	public void setChat_time(String chat_time) {
 		this.chat_time = chat_time;
 	}
-	
+
 }

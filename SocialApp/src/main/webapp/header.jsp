@@ -1,4 +1,4 @@
-<%@ page import="dao.UserDAO"%>
+<%@ page import="com.social.dao.UserDAO"%>
 <header>
 	<div class="fixed-top d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm ">
 		<h3 class="my-0 mr-md-auto font-weight-normal">Social</h3>

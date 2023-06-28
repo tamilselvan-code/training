@@ -1,4 +1,4 @@
-package model;
+package com.social.model;
 
 public class Post {
 
@@ -6,11 +6,11 @@ public class Post {
 	private int user_id;
 	private String body;
 	private String post_time;
-	
+
 	public Post() {
 		super();
 	}
-	
+
 	public Post(int post_id, int user_id, String body, String post_time) {
 		super();
 		this.post_id = post_id;
@@ -50,5 +50,5 @@ public class Post {
 	public void setPost_time(String post_time) {
 		this.post_time = post_time;
 	}
-	
+
 }

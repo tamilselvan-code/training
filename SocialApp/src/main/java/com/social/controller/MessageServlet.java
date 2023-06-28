@@ -1,4 +1,4 @@
-package controller;
+package com.social.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.MessageDAO;
-import dao.UserDAO;
-import model.Message;
-import model.User;
+import com.social.dao.MessageDAO;
+import com.social.dao.UserDAO;
+import com.social.model.Message;
+import com.social.model.User;
 
 /**
  * Servlet implementation class MessageServlet
@@ -22,36 +22,39 @@ import model.User;
 @WebServlet("/MessageServlet")
 public class MessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MessageServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public MessageServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("user_id") == null) {
 			response.sendRedirect("login");
 			return;
 		}
-		
+
 		UserDAO userDAO = new UserDAO();
 		MessageDAO messageDAO = new MessageDAO();
-		
-		if(request.getParameter("delete") != null) {
+
+		if (request.getParameter("delete") != null) {
 			try {
-				messageDAO.deleteAllMessage((int) session.getAttribute("user_id"), Integer.parseInt(request.getParameter("delete")));
+				messageDAO.deleteAllMessage((int) session.getAttribute("user_id"),
+						Integer.parseInt(request.getParameter("delete")));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		ArrayList<User> users = new ArrayList<>();
 		ArrayList<Message> messages = new ArrayList<>();
 		try {
@@ -66,9 +69,11 @@ public class MessageServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

@@ -1,4 +1,4 @@
-package controller;
+package com.social.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UserDAO;
-import model.User;
+import com.social.dao.UserDAO;
+import com.social.model.User;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -17,19 +17,21 @@ import model.User;
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegisterServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public RegisterServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("user_id") != null) {
 			response.sendRedirect("home");
@@ -40,15 +42,17 @@ public class RegisterServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String first_name = request.getParameter("first_name").trim();
 		String last_name = request.getParameter("last_name").trim();
 		String email = request.getParameter("email").trim();
 		String password = request.getParameter("password").trim();
 		String cpassword = request.getParameter("cpassword").trim();
-		
+
 		boolean status = true;
 		request.removeAttribute("fmsg");
 		request.removeAttribute("lmsg");
@@ -56,33 +60,33 @@ public class RegisterServlet extends HttpServlet {
 		request.removeAttribute("pmsg");
 		request.removeAttribute("cpmsg");
 		request.removeAttribute("rmsg");
-		
+
 		if (first_name.equals("")) {
 			request.setAttribute("fmsg", "First name is required ");
 			status = false;
 		}
-		if(last_name.equals("")) {
+		if (last_name.equals("")) {
 			request.setAttribute("lmsg", "Last name is required ");
 			status = false;
 		}
-		if(email.equals("")) {
+		if (email.equals("")) {
 			request.setAttribute("emsg", "Email is required ");
 			status = false;
 		}
-		if(password.equals("")) {
+		if (password.equals("")) {
 			request.setAttribute("pmsg", "Password is required ");
 			status = false;
 		}
-		if(cpassword.equals("")) {
+		if (cpassword.equals("")) {
 			request.setAttribute("cpmsg", "Password is required ");
 			status = false;
-		} else if(!password.equals(cpassword)) {
+		} else if (!password.equals(cpassword)) {
 			request.setAttribute("cpmsg", "Password is not matched ");
 			status = false;
-			
+
 		}
-		
-		if(!status) {
+
+		if (!status) {
 			request.setAttribute("page", "register");
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		} else {
@@ -98,8 +102,7 @@ public class RegisterServlet extends HttpServlet {
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 
 		}
-		
-		
+
 	}
 
 }

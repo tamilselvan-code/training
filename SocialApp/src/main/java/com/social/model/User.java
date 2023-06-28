@@ -1,4 +1,4 @@
-package model;
+package com.social.model;
 
 public class User {
 
@@ -8,7 +8,7 @@ public class User {
 	private String password;
 	private String email;
 	private String image;
-	
+
 	public User() {
 		super();
 	}
@@ -70,5 +70,5 @@ public class User {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
+
 }
