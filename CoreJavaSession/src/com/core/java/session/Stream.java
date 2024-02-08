@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Test2 {
+public class Stream {
 
 	public static void main(String[] args) {
 
@@ -18,19 +18,19 @@ public class Test2 {
 		product_two.setPrice(20);
 
 		Product product_three = new Product();
-		product_three.setName("Seepu");
+		product_three.setName("Oil");
 		product_three.setPrice(30);
 
 		Product product_four = new Product();
-		product_four.setName("Seepu");
+		product_four.setName("Oil");
 		product_four.setPrice(40);
 
 		Product product_five = new Product();
-		product_five.setName("Kannaadi");
+		product_five.setName("Powder");
 		product_five.setPrice(50);
 
 		Product product_six = new Product();
-		product_six.setName("Kannaadi");
+		product_six.setName("Powder");
 		product_six.setPrice(60);
 
 		List<Product> products = new ArrayList<Product>();
