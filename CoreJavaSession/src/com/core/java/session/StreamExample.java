@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class Stream {
+public class StreamExample {
 
 	public static void main(String[] args) {
 
@@ -47,9 +48,13 @@ public class Stream {
 
 		List<Product> unique = products.stream().distinct().toList();
 		System.out.println(unique);
-		
-		List<Product> filtered = products.stream().filter( p -> p.getPrice() == 20).toList();
+
+		List<Product> filtered = products.stream().filter(p -> p.getPrice() == 20).toList();
 		System.out.println(filtered);
+
+		Stream.of("one", "two", "three", "four").filter(e -> e.length() > 3)
+				.peek(e -> System.out.println("Filtered value: " + e)).map(String::toUpperCase)
+				.peek(e -> System.out.println("Mapped value: " + e)).collect(Collectors.toList());
 
 	}
 
