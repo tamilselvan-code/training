@@ -45,6 +45,12 @@ public class Stream {
 		Map<String, List<Product>> result = products.stream().collect(Collectors.groupingBy(Product::getName));
 		System.out.println(result);
 
+		List<Product> unique = products.stream().distinct().toList();
+		System.out.println(unique);
+		
+		List<Product> filtered = products.stream().filter( p -> p.getPrice() == 20).toList();
+		System.out.println(filtered);
+
 	}
 
 }
