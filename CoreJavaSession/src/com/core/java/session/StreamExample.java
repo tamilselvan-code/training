@@ -56,6 +56,10 @@ public class StreamExample {
 				.peek(e -> System.out.println("Filtered value: " + e)).map(String::toUpperCase)
 				.peek(e -> System.out.println("Mapped value: " + e)).collect(Collectors.toList());
 
+		products.stream().forEach(System.out::println);
+
+		products.stream().forEach(p -> System.out.println(p.getName()));
+
 	}
 
 }
