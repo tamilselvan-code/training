@@ -1,3 +1,7 @@
-Step 1: Select project -> RIght click -> Run As -> Maven install
+Step 1: Select project -> Right click -> Run As -> Maven install
 Step 2: docker build -t docker-spring-mysql-demo .   --> Run in command prompt from the project folder
 Step 3: docker compose up --> Run in command prompt from the project folder
+
+Urls to access app:
+                        localhost:8080/list   (GET request)
+                        localhost:8080/add    (POST request)
